@@ -1,0 +1,432 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Car Rental &mdash; Free Website Template, Free HTML5 Template by freehtml5.co</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
+	<meta name="keywords"
+		content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="freehtml5.co" />
+
+	<!-- 
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FreeHTML5.co
+		
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	 -->
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="static/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="static/css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="static/css/bootstrap.css">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="static/css/flexslider.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="static/css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="static/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	<style>
+		.modal-body input {
+			color: black;
+		}
+
+		.modal-body form label {
+			color: black;
+		}
+		.modal-body form option{
+			color: black;
+		}
+		.modal-body form select{
+			color: black;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="fh5co-loader"></div>
+
+	<div id="page">
+		<nav class="fh5co-nav" role="navigation">
+			<!-- <div class="top-menu"> -->
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 text-center logo-wrap">
+						<div id="fh5co-logo"><a href="/">Car rental<span>.</span></a></div>
+					</div>
+					<div class="col-xs-12 text-center menu-1 menu-wrap">
+
+
+						<ul>
+							<li><a href="/">Strona Główna</a></li>
+							<li class="active"><a href="/offer">Oferta</a></li>
+							<li><a href="/contact">Skontaktuj się</a></li>
+							<% if(user) {%>
+								<li><a href="#">
+										<%= user['email'] %>
+									</a></li>
+								<% } else{%>
+									<li><a href="/login">Zaloguj się</a></li>
+									<% } %>
+										<li><a href="/logout">Wyloguj się</a></li>
+										<li><a href="/signup" class="btn">Zarejestruj się</a></li>
+										<% if(admin) {%>
+											<li><a href="/panel">ADMIN PANEL</a></li>
+											<% } %>
+						</ul>
+						<%- include('./partials/headerend.ejs') %>
+
+							<div id="fh5co-featured-menu" class="fh5co-section">
+								<div class="container">
+									<div class="row">
+										<div class="col-md-12 fh5co-heading animate-box">
+											<h2>Nasza Oferta</h2>
+											<div class="row">
+												<div class="col-md-6">
+													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+														Reiciendis ab debitis sit
+														itaque totam, a maiores nihil, nulla magnam porro minima
+														officiis! Doloribus aliquam
+														voluptates corporis et tempora consequuntur ipsam, itaque,
+														nesciunt similique
+														commodi omnis. Ad magni perspiciatis, voluptatum repellat.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<% for (let i=0; i < data.length; i++) {%>
+											<% if(i%2==0) {%>
+												<div class="col-md-4 fh5co-item-wrap ml-5 mr-5">
+													<% } %>
+
+														<div class="fh5co-item animate-box mb-5">
+															<img src="static/cars/<%= data[i]['id'] %>.png " class=""
+																width="320px" height="180px"
+																style="border: 1px solid black;">
+
+															<h3>
+																<%= data[i]['brand'] %><%= data[i]['model'] %> - <%= data[i]['price'] %> zł
+															</h3>
+															<% if(data[i]['avalible']) {%> <a href=""
+																	data-toggle="modal" data-target="#exampleModal"
+																	class="btn-primary handler"
+																	data-id="<%= data[i]['id'] %> ">Wypożycz</a>
+																<% } else {%> <button class="btn-danger" disabled>
+																		Niedostepne </button>
+																	<% } %>
+														</div>
+
+														<% if(i%2==1) {%>
+												</div>
+												<% } %>
+
+													<% } %>
+														<% if(data.length%2==1) { %>
+									</div>
+									<% } %>
+								</div>
+								<div class="row">
+									<% if (pages> 0) { %>
+										<ul class="pagination text-center">
+											<% if (current==1) { %>
+												<li class="disabled"><a>First</a></li>
+												<% } else { %>
+													<li><a href="/offer?page=0">First</a></li>
+													<% } %>
+														<% var i=(Number(current)> 5 ? Number(current) - 4 : 1) %>
+															<% if (i !==1) { %>
+																<li class="disabled"><a>...</a></li>
+																<% } %>
+																	<% for (; i <=(Number(current) + 4) && i <=pages;
+																		i++) { %>
+																		<% if (i==current) { %>
+																			<li class="active"><a>
+																					<%= i %>
+																				</a></li>
+																			<% } else { %>
+																				<li><a href="/offer?page=<%= i %>">
+																						<%= i %>
+																					</a></li>
+																				<% } %>
+																					<% if (i==Number(current) + 4 && i <
+																						pages) { %>
+																						<li class="disabled"><a>...</a>
+																						</li>
+																						<% } %>
+																							<% } %>
+																								<% if (current==pages) {
+																									%>
+																									<li
+																										class="disabled">
+																										<a>Last</a>
+																									</li>
+																									<% } else { %>
+																										<li><a
+																												href="/offer?page=<%= pages %>">Last</a>
+																										</li>
+																										<% } %>
+										</ul>
+										<% } %>
+								</div>
+
+
+							</div>
+					</div>
+
+					<div id="fh5co-started" class="fh5co-section animate-box"
+						style="background-image: url(static/images/blog-image-1-940x460.jpg);"
+						data-stellar-background-ratio="0.5">
+						<div class="overlay"></div>
+						<div class="container">
+							<div class="row animate-box">
+								<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+									<h2>Rent a Car</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae enim quae
+										vitae
+										cupiditate, sequi quam ea id dolor reiciendis consectetur repudiandae. Rem quam,
+										repellendus
+										veniam ipsa fuga maxime odio? Eaque!</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<footer id="fh5co-footer" role="contentinfo" class="fh5co-section">
+						<div class="container">
+							<div class="row row-pb-md">
+								<div class="col-md-4 fh5co-widget">
+									<h4>Car rental</h4>
+									<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos
+										cumque dicta
+										adipisci architecto culpa amet.</p>
+								</div>
+								<div class="col-md-2 col-md-push-1 fh5co-widget">
+									<h4>Links</h4>
+									<ul class="fh5co-footer-links">
+										<li><a href="/">Strona Główna</a></li>
+										<li><a href="/offer">Oferta</a></li>
+										<li><a href="/contact">Kontakt</a></li>
+									</ul>
+								</div>
+
+								<div class="col-md-2 col-md-push-1 fh5co-widget">
+									<h4>Categories</h4>
+									<ul class="fh5co-footer-links">
+										<li><a href="#">Landing Page</a></li>
+										<li><a href="#">Real Estate</a></li>
+										<li><a href="#">Personal</a></li>
+										<li><a href="#">Business</a></li>
+										<li><a href="#">e-Commerce</a></li>
+									</ul>
+								</div>
+
+								<div class="col-md-4 col-md-push-1 fh5co-widget">
+									<h4>Contact Information</h4>
+									<ul class="fh5co-footer-links">
+										<li>198 West 21th Street, <br> Suite 721 New York NY 10016</li>
+										<li><a href="tel://1234567920">+ 1235 2355 98</a></li>
+										<li><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
+										<li><a href="http://https://freehtml5.co">freehtml5.co</a></li>
+									</ul>
+								</div>
+
+							</div>
+
+							<div class="row copyright">
+								<div class="col-md-12 text-center">
+									<p>
+										<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
+										<small class="block">Designed by <a href="http://freehtml5.co/"
+												target="_blank">FreeHTML5.co</a>
+											Demo Images: <a href="http://unsplash.co/"
+												target="_blank">Unsplash</a></small>
+									</p>
+									<p>
+									<ul class="fh5co-social-icons">
+										<li><a href="#"><i class="icon-twitter2"></i></a></li>
+										<li><a href="#"><i class="icon-facebook2"></i></a></li>
+										<li><a href="#"><i class="icon-linkedin2"></i></a></li>
+										<li><a href="#"><i class="icon-dribbble2"></i></a></li>
+									</ul>
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</footer>
+				</div>
+
+				<div class="gototop js-top">
+					<a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
+				</div>
+
+				<% if(locals.status) {%>
+				<div class="modal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>Modal body text goes here.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+					</div>
+				</div>
+				</div>
+				<% } %>
+
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 70px;">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Rezerwuj teraz</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="/rent" id="rent" method="POST">
+									<input type="hidden" name="carid" id="carid" value="">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="start_location">Gdzie odbierzesz?</label>
+												<select name="start_location" id="start_location" class="form-control">
+													<% for(let i = 0; i < locs.length; i++) {%>
+														<option value="<%= locs[i]['id'] %>"><%= locs[i]['city'] %>,<%= locs[i]['address'] %></option>
+													<% } %> 
+												</select>
+												<span class="text-danger"></span>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="end_location">Gdzie odstawis?</label>
+												<select name="end_location" id="end_location" class="form-control">
+													<% for(let i = 0; i < locs.length; i++) {%>
+														<option value="<%= locs[i]['id'] %>"><%= locs[i]['city'] %>,<%= locs[i]['address'] %></option>
+													<% } %> 
+												</select>
+												<span class="text-danger"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="start_date">Kiedy odbierzesz?</label>
+												<input type="datetime-local" class="form-control"
+													placeholder="Pick-up date/time" required="" name="start_date">
+												<span class="text-danger"></span>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="end_date">Kiedy odstawis?</label>
+												<input type="datetime-local" class="form-control"
+													placeholder="Return date/time" required="" name="end_date">
+												<span class="text-danger"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6 ml-auto mr-auto">
+											<div class="form-group row">
+												<label for="phone">Twój nr telefonu</label>
+												<input type="text" maxlength="9" class="form-control"
+													placeholder="Enter phone" required="" name="phone">
+												<span class="text-danger"></span>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancel</button>
+										<input type="submit" class="btn btn-primary" value="Book Now" name="sub">
+									</div>
+								</form>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+				<!-- jQuery -->
+				<script src="static/js/jquery.min.js"></script>
+				<!-- jQuery Easing -->
+				<script src="static/js/jquery.easing.1.3.js"></script>
+				<!-- Bootstrap -->
+				<script src="static/js/bootstrap.min.js"></script>
+				<!-- Waypoints -->
+				<script src="static/js/jquery.waypoints.min.js"></script>
+				<!-- Waypoints -->
+				<script src="static/js/jquery.stellar.min.js"></script>
+				<!-- Flexslider -->
+				<script src="static/js/jquery.flexslider-min.js"></script>
+				<!-- Main -->
+				<script src="static/js/main.js"></script>
+
+				
+				<script>
+					$(document).on("click", ".handler", function () {
+						var carid = $(this).data('id');
+						$(".modal-body #carid").val(carid);
+						console.log(carid);
+
+					});
+					console.log('s');
+				</script>
+
+</body>
+
+</html>
