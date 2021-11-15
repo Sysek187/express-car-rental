@@ -25,9 +25,9 @@ const {
 const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const adminController = require('../controllers/adminController');
-const { TopologyDescription } = require('mongodb');
 
-const url = 'mongodb+srv://user123:user123@cluster0.zdth0.mongodb.net/rental?retryWrites=true&w=majority';
+const url = process.env.dbURI;
+
 
 const client = new MongoClient(url, { // connect to mongodb
     useNewUrlParser: true,
